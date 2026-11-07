@@ -1,0 +1,37 @@
+{
+  "success": true,
+  "query": "pink roses bouquet wrapped in craft paper elegant flower shop",
+  "count": 4,
+  "ranked": false,
+  "captioned_count": 0,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/96b60414475e.jpg",
+      "caption": "",
+      "source": "Seaman Paper",
+      "original_width": "1080px",
+      "original_height": "1452px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/91af372acb23.jpg",
+      "caption": "",
+      "source": "themillionroses.com",
+      "original_width": "3000px",
+      "original_height": "3000px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/e54dc2f31ef2.jpg",
+      "caption": "",
+      "source": "Amazon.com",
+      "original_width": "894px",
+      "original_height": "894px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/9bfbd6237e7a.jpg",
+      "caption": "",
+      "source": "YouTube",
+      "original_width": "1280px",
+      "original_height": "720px"
+    }
+  ]
+}

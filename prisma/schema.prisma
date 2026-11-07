@@ -1,0 +1,260 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// ============ Users (real accounts) ============
+model User {
+  id            String   @id @default(cuid())
+  name          String
+  phone         String   @unique
+  email         String   @default("")
+  password      String // scrypt hash "salt:hash"
+  role          String   @default("user") // user | admin
+  city          String   @default("تهران")
+  birthday      String   @default("")
+  gender        String   @default("female")
+  avatarHue     Int      @default(0)
+  walletBalance Int      @default(0)
+  points        Int      @default(0)
+  emailOffers   Boolean  @default(true)
+  smsOffers     Boolean  @default(true)
+  note          String   @default("")
+  isBanned      Boolean  @default(false)
+  memberSince   DateTime @default(now())
+  createdAt     DateTime @default(now())
+
+  addresses     Address[]
+  walletTxs     WalletTx[]
+  notifications Notification[]
+  orders        Order[]
+  favorites     Favorite[]
+  reviews       Review[]
+  tickets       Ticket[]
+}
+
+// ============ Catalog ============
+model Product {
+  id           String   @id @default(cuid())
+  slug         String   @unique
+  name         String
+  description  String
+  category     String
+  price        Int
+  oldPrice     Int?
+  image        String
+  stock        Int      @default(10)
+  rating       Float    @default(4.5)
+  reviews      Int      @default(0)
+  isBestseller Boolean  @default(false)
+  isNew        Boolean  @default(false)
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+}
+
+// ============ Orders (linked to real user) ============
+model Order {
+  id            String   @id @default(cuid())
+  code          String   @unique @default(cuid())
+  userId        String
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  customerName  String
+  phone         String
+  address       String
+  city          String   @default("تهران")
+  province      String   @default("تهران")
+  postal        String   @default("")
+  deliveryDate  String   @default("")
+  deliverySlot  String   @default("")
+  cardMessage   String   @default("")
+  addons        String   @default("[]")
+  couponCode    String   @default("")
+  paymentMethod String   @default("online") // online | wallet | cod
+  paymentRef    String   @default("") // gateway receipt / tracking ref
+  paidAt        DateTime? // null = not paid yet (online orders awaiting gateway)
+  shippingCost  Int      @default(0)
+  discount      Int      @default(0)
+  pointsEarned  Int      @default(0)
+  note          String?
+  items         String
+  total         Int
+  status        String   @default("pending")
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  payments Payment[]
+}
+
+// ============ Payment gateway transactions ============
+model Payment {
+  id          String    @id @default(cuid())
+  userId      String
+  orderId     String?
+  order       Order?    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  kind        String    @default("order") // order | wallet_charge
+  authority   String    @unique @default(cuid()) // gateway token
+  amount      Int
+  gateway     String    @default("sandbox") // sandbox | zarinpal
+  status      String    @default("pending") // pending | success | failed | canceled
+  description String    @default("")
+  refId       String    @default("") // bank reference number
+  cardPan     String    @default("") // masked card number
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+// ============ Favorites (server-side wishlist) ============
+model Favorite {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  productId String
+  name      String
+  price     Int
+  image     String
+  createdAt DateTime @default(now())
+
+  @@unique([userId, productId])
+}
+
+// ============ Addresses ============
+model Address {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title     String
+  receiver  String
+  phone     String
+  province  String
+  city      String
+  postal    String   @default("")
+  line      String
+  isDefault Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+// ============ Wallet ============
+model WalletTx {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type        String // charge | payment | refund | gift
+  amount      Int
+  description String
+  createdAt   DateTime @default(now())
+}
+
+// ============ Coupons ============
+model Coupon {
+  id        String   @id @default(cuid())
+  code      String   @unique
+  title     String
+  type      String   @default("percent") // percent | amount
+  value     Int
+  minOrder  Int      @default(0)
+  maxUses   Int      @default(100)
+  used      Int      @default(0)
+  expiresAt String   @default("")
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+}
+
+// ============ Reviews ============
+model Review {
+  id           String   @id @default(cuid())
+  userId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  productId    String
+  productName  String
+  productImage String   @default("")
+  author       String
+  rating       Int
+  comment      String
+  status       String   @default("pending") // pending | approved | rejected
+  createdAt    DateTime @default(now())
+}
+
+// ============ Notifications (per user) ============
+model Notification {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title     String
+  body      String
+  type      String   @default("system") // system | order | wallet | ticket | promo
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+// ============ Contact messages ============
+model Message {
+  id        String   @id @default(cuid())
+  name      String
+  phone     String
+  subject   String
+  body      String
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+// ============ Support tickets ============
+model Ticket {
+  id        String      @id @default(cuid())
+  code      String      @unique @default(cuid())
+  userId    String
+  user      User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  subject   String
+  category  String      @default("general")
+  priority  String      @default("normal")
+  status    String      @default("open") // open | answered | closed
+  userName  String
+  phone     String
+  messages  TicketMsg[]
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+}
+
+model TicketMsg {
+  id         String   @id @default(cuid())
+  ticketId   String
+  ticket     Ticket   @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+  sender     String   @default("user") // user | admin
+  senderName String   @default("")
+  body       String
+  createdAt  DateTime @default(now())
+}
+
+// ============ Shop settings ============
+model Settings {
+  id              String  @id @default(cuid())
+  shopName        String  @default("گلستان حافظ")
+  slogan          String  @default("گل، شعر و عشق در هر سفارش")
+  phone           String  @default("۰۲۱-۸۸۷۷۶۶۵۵")
+  email           String  @default("hello@golestanhafez.ir")
+  address         String  @default("تهران، خیابان ولیعصر، کوچه یاس، پلاک ۸")
+  hours           String  @default("هر روز از ۹ صبح تا ۹ شب")
+  instagram       String  @default("golestan.hafez")
+  telegram        String  @default("golestanhafez")
+  whatsapp        String  @default("09121234567")
+  shippingFee     Int     @default(89000)
+  freeShippingMin Int     @default(1000000)
+  announcement    String  @default("ارسال رایگان سفارش‌های بالای ۱ میلیون تومان")
+  isOpen          Boolean @default(true)
+  autoAccept      Boolean @default(true)
+  paymentGateway     String @default("sandbox") // sandbox | zarinpal
+  zarinpalMerchantId String @default("")
+}
+
+// ============ Uploaded images (stored in DB so they persist like all app data) ============
+model UploadedImage {
+  id        String   @id @default(cuid())
+  filename  String
+  mime      String
+  size      Int
+  data      Bytes
+  createdAt DateTime @default(now())
+}

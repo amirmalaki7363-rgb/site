@@ -1,0 +1,37 @@
+{
+  "success": true,
+  "query": "bright sunflower bouquet",
+  "count": 4,
+  "ranked": false,
+  "captioned_count": 0,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/025e272507e5.jpg",
+      "caption": "",
+      "source": "Samantha's Flowers",
+      "original_width": "1080px",
+      "original_height": "1080px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/08627385e07e.jpg",
+      "caption": "",
+      "source": "Fort Lauderdale Florist",
+      "original_width": "2000px",
+      "original_height": "1999px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/e9aca855d36e.jpg",
+      "caption": "",
+      "source": "Paloma's Blooming Bouquets",
+      "original_width": "2400px",
+      "original_height": "2400px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/6818d559b779.jpg",
+      "caption": "",
+      "source": "Flower Delivery by Rose City Floral",
+      "original_width": "2448px",
+      "original_height": "3264px"
+    }
+  ]
+}

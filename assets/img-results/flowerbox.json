@@ -1,0 +1,37 @@
+{
+  "success": true,
+  "query": "luxury flower box arrangement roses in round box",
+  "count": 4,
+  "ranked": false,
+  "captioned_count": 0,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/1b66ea6f86be.jpg",
+      "caption": "",
+      "source": "Amazon.com",
+      "original_width": "1600px",
+      "original_height": "1600px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/018e341bfc7b.jpg",
+      "caption": "",
+      "source": "Venus et Fleur",
+      "original_width": "2500px",
+      "original_height": "2500px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/79a76c360c54.png",
+      "caption": "",
+      "source": "BMade",
+      "original_width": "1946px",
+      "original_height": "1946px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/cb5962d1a84d.png",
+      "caption": "",
+      "source": "June Flowers",
+      "original_width": "1080px",
+      "original_height": "1080px"
+    }
+  ]
+}

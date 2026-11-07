@@ -1,0 +1,30 @@
+{
+  "success": true,
+  "query": "white orchid plant in pot elegant",
+  "count": 3,
+  "ranked": false,
+  "captioned_count": 0,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/dcc0e59917bd.jpg",
+      "caption": "",
+      "source": "Muguet Florist",
+      "original_width": "3024px",
+      "original_height": "4032px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/a7fda6dad1bf.jpg",
+      "caption": "",
+      "source": "Gump's",
+      "original_width": "1080px",
+      "original_height": "1080px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/bf7a2770d5e4.jpg",
+      "caption": "",
+      "source": "South Florals",
+      "original_width": "1080px",
+      "original_height": "1350px"
+    }
+  ]
+}

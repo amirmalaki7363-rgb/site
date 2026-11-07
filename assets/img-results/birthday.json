@@ -1,0 +1,37 @@
+{
+  "success": true,
+  "query": "colorful birthday flower bouquet gift festive",
+  "count": 4,
+  "ranked": false,
+  "captioned_count": 0,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/0ffda4e2da0d.jpg",
+      "caption": "",
+      "source": "Hialeah Florist - Cherry Blossom Flowers and Balloons",
+      "original_width": "2500px",
+      "original_height": "2500px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/e67065489a0e.jpg",
+      "caption": "",
+      "source": "Amazon.com",
+      "original_width": "814px",
+      "original_height": "1000px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/5fd65439c222.jpg",
+      "caption": "",
+      "source": "Bloomthis",
+      "original_width": "2400px",
+      "original_height": "1200px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/ce861110524c.jpg",
+      "caption": "",
+      "source": "Graduationmall",
+      "original_width": "960px",
+      "original_height": "1200px"
+    }
+  ]
+}

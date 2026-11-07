@@ -1,0 +1,37 @@
+{
+  "success": true,
+  "query": "bridal wedding bouquet white pastel flowers",
+  "count": 4,
+  "ranked": false,
+  "captioned_count": 0,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/6c7849be332b.jpg",
+      "caption": "",
+      "source": "Rinlong Flower - Rinlong Flower",
+      "original_width": "1500px",
+      "original_height": "2000px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/8e9830d9a8ba.png",
+      "caption": "",
+      "source": "Flower Moxie",
+      "original_width": "1016px",
+      "original_height": "1324px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/c2ed292ae894.png",
+      "caption": "",
+      "source": "Flowers by Special Arrangement",
+      "original_width": "1080px",
+      "original_height": "1080px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/c3d3c3abfe85.jpg",
+      "caption": "",
+      "source": "Rinlong Flower - Rinlong Flower",
+      "original_width": "1500px",
+      "original_height": "2000px"
+    }
+  ]
+}

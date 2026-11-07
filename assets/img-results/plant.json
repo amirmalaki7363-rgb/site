@@ -1,0 +1,37 @@
+{
+  "success": true,
+  "query": "indoor potted houseplant green leaves in ceramic pot",
+  "count": 4,
+  "ranked": false,
+  "captioned_count": 0,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/bcbf9f6fcc78.jpeg",
+      "caption": "",
+      "source": "Walmart",
+      "original_width": "1500px",
+      "original_height": "2100px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/acfec2c8d745.jpg",
+      "caption": "",
+      "source": "The Home Depot",
+      "original_width": "1000px",
+      "original_height": "1000px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/96018727e42c.jpg",
+      "caption": "",
+      "source": "Amazon.com.be",
+      "original_width": "1600px",
+      "original_height": "1600px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/e626e9774143.jpg",
+      "caption": "",
+      "source": "The Sill",
+      "original_width": "1200px",
+      "original_height": "1553px"
+    }
+  ]
+}

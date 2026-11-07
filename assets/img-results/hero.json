@@ -1,0 +1,37 @@
+{
+  "success": true,
+  "query": "florist holding beautiful flower bouquet in flower shop",
+  "count": 4,
+  "ranked": false,
+  "captioned_count": 0,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/1404174604af.jpg",
+      "caption": "",
+      "source": "Miami Flower Store",
+      "original_width": "1536px",
+      "original_height": "2048px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/c3a0ec5fba82.jpg",
+      "caption": "",
+      "source": "Victoria Whitelaw Beautiful Flowers",
+      "original_width": "1363px",
+      "original_height": "2048px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/aa30749699b2.jpg",
+      "caption": "",
+      "source": "Thursd",
+      "original_width": "1000px",
+      "original_height": "1000px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/ae7d95d7e30b.png",
+      "caption": "",
+      "source": "Flower Bar Co",
+      "original_width": "1500px",
+      "original_height": "1500px"
+    }
+  ]
+}

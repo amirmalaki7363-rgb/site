@@ -1,0 +1,37 @@
+{
+  "success": true,
+  "query": "pink peonies flowers bouquet",
+  "count": 4,
+  "ranked": false,
+  "captioned_count": 0,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/bc153bf92a90.jpg",
+      "caption": "",
+      "source": "AvaFlowers",
+      "original_width": "960px",
+      "original_height": "1280px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/ff535387235c.jpg",
+      "caption": "",
+      "source": "Rosemia Flowers",
+      "original_width": "2267px",
+      "original_height": "3145px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/a5e107cad5c2.jpg",
+      "caption": "",
+      "source": "Afloral",
+      "original_width": "1946px",
+      "original_height": "2724px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/b1d6857eb0b4.jpg",
+      "caption": "",
+      "source": "Flowers by Marianne",
+      "original_width": "2000px",
+      "original_height": "2000px"
+    }
+  ]
+}

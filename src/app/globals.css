@@ -1,0 +1,162 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-vazir);
+  --font-mono: var(--font-vazir);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  /* Golestane Hafez brand palette */
+  --color-blush: #e8b4b8;
+  --color-blush-soft: #f6dcde;
+  --color-blush-dark: #d9979d;
+  --color-sage: #a8c5a0;
+  --color-sage-soft: #dcead7;
+  --color-sage-dark: #7fa577;
+  --color-cream: #f9f5f0;
+  --color-cream-dark: #f0e8de;
+  --color-charcoal: #2c2c2c;
+  --color-gold: #d4a574;
+  --color-gold-soft: #f0e2cf;
+  --color-gold-dark: #b8865a;
+}
+
+:root {
+  --radius: 1rem;
+  --background: #f9f5f0;
+  --foreground: #2c2c2c;
+  --card: #ffffff;
+  --card-foreground: #2c2c2c;
+  --popover: #ffffff;
+  --popover-foreground: #2c2c2c;
+  --primary: #e8b4b8;
+  --primary-foreground: #2c2c2c;
+  --secondary: #a8c5a0;
+  --secondary-foreground: #2c2c2c;
+  --muted: #f0e8de;
+  --muted-foreground: #7a716a;
+  --accent: #d4a574;
+  --accent-foreground: #ffffff;
+  --destructive: #d9534f;
+  --border: #ece3d8;
+  --input: #ece3d8;
+  --ring: #e8b4b8;
+  --chart-1: #e8b4b8;
+  --chart-2: #a8c5a0;
+  --chart-3: #d4a574;
+  --chart-4: #f6dcde;
+  --chart-5: #7fa577;
+  --sidebar: #ffffff;
+  --sidebar-foreground: #2c2c2c;
+  --sidebar-primary: #e8b4b8;
+  --sidebar-primary-foreground: #2c2c2c;
+  --sidebar-accent: #f0e8de;
+  --sidebar-accent-foreground: #2c2c2c;
+  --sidebar-border: #ece3d8;
+  --sidebar-ring: #e8b4b8;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "ss01";
+  }
+  ::selection {
+    background: #e8b4b8;
+    color: #2c2c2c;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f0e8de;
+}
+::-webkit-scrollbar-thumb {
+  background: #e8b4b8;
+  border-radius: 8px;
+  border: 2px solid #f0e8de;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #d9979d;
+}
+
+/* Soft float animation for decorative blobs */
+@keyframes floaty {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-14px) rotate(3deg);
+  }
+}
+.animate-floaty {
+  animation: floaty 6s ease-in-out infinite;
+}
+
+@keyframes petal-fall {
+  0% {
+    transform: translateY(-10vh) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.85;
+  }
+  100% {
+    transform: translateY(110vh) rotate(320deg);
+    opacity: 0;
+  }
+}
+.petal {
+  position: absolute;
+  top: 0;
+  border-radius: 80% 0 80% 0;
+  background: linear-gradient(135deg, #f6dcde, #e8b4b8);
+  pointer-events: none;
+  animation: petal-fall linear infinite;
+}

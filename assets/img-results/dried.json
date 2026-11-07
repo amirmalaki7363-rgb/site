@@ -1,0 +1,37 @@
+{
+  "success": true,
+  "query": "dried flowers bouquet arrangement natural",
+  "count": 4,
+  "ranked": false,
+  "captioned_count": 0,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/53a1663c0f38.jpg",
+      "caption": "",
+      "source": "Thimbleberry House",
+      "original_width": "1946px",
+      "original_height": "1946px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/a71c7c7b7252.jpg",
+      "caption": "",
+      "source": "Family of Things",
+      "original_width": "2779px",
+      "original_height": "3882px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/895d583ab6f2.png",
+      "caption": "",
+      "source": "Coastal Habitat",
+      "original_width": "1200px",
+      "original_height": "1800px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/08d769809ba5.jpg",
+      "caption": "",
+      "source": "DIRT Flowers",
+      "original_width": "2048px",
+      "original_height": "1365px"
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "success": true,
+  "query": "red roses bouquet gift luxury",
+  "count": 4,
+  "ranked": false,
+  "captioned_count": 0,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/f90d7776f305.jpg",
+      "caption": "",
+      "source": "Jazirah Flowers",
+      "original_width": "1816px",
+      "original_height": "2336px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/42202d9b5403.jpg",
+      "caption": "",
+      "source": "Fancy Flower",
+      "original_width": "1512px",
+      "original_height": "2016px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/cfbdaf08f956.png",
+      "caption": "",
+      "source": "Granada Floral San Diego",
+      "original_width": "1024px",
+      "original_height": "1536px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/7de1a0e9011c.jpg",
+      "caption": "",
+      "source": "BloomNation",
+      "original_width": "2316px",
+      "original_height": "3088px"
+    }
+  ]
+}
