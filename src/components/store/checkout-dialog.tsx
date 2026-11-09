@@ -267,7 +267,7 @@ export default function CheckoutDialog() {
             <h3 className="font-bold text-lg text-charcoal">برای ثبت سفارش وارد حساب شوید</h3>
             <p className="text-sm text-muted-foreground leading-7">
               ثبت سفارش، پیگیری مرسوله و استفاده از کیف پول و کدهای تخفیف نیاز به حساب کاربری دارد.
-              <span className="block mt-1">ثبت‌نام کمتر از ۳۰ ثانیه طول می‌کشد + ۵۰ هزار تومان هدیه!</span>
+              <span className="block mt-1">ثبت‌نام کمتر از ۳۰ ثانیه طول می‌کشد.</span>
             </p>
             <div className="flex gap-2 w-full">
               <Button

@@ -371,7 +371,7 @@ function PhoneOrderDialog({ open, onOpenChange }: { open: boolean; onOpenChange:
 export function CustomersSection() {
   const { data, refresh, toast } = usePanel();
   const [query, setQuery] = useState("");
-  const [form, setForm] = useState<{ id?: string; name: string; phone: string; email: string; city: string; note: string; wallet?: number; points?: number; isBanned?: boolean } | null>(null);
+  const [form, setForm] = useState<{ id?: string; name: string; phone: string; email: string; city: string; note: string; wallet?: number; points?: number; isBanned?: boolean; password?: string } | null>(null);
   const [detail, setDetail] = useState<Customer | null>(null);
   const [deleteTarget, setDeleteTarget] = useState<Customer | null>(null);
 
@@ -567,6 +567,11 @@ export function CustomersSection() {
                 </div>
               )}
               {form.id && (
+                <Field label="رمز جدید (فقط برای بازیابی رمز؛ خالی = بدون تغییر)">
+                  <input className={inputCls} dir="ltr" autoComplete="off" placeholder="حداقل ۸ کاراکتر" value={form.password ?? ""} onChange={(e) => setForm({ ...form, password: e.target.value })} />
+                </Field>
+              )}
+              {form.id && (
                 <label className="flex items-center justify-between rounded-2xl bg-cream/70 px-4 py-3 cursor-pointer">
                   <span className="text-sm font-bold text-charcoal">مسدودسازی حساب کاربر</span>
                   <input
@@ -586,7 +591,7 @@ export function CustomersSection() {
                   const res = await panelMutate(form.id ? "customer.update" : "customer.create", {
                     id: form.id,
                     data: form.id
-                      ? { name: form.name.trim(), phone: toEnDigits(form.phone).trim(), email: form.email, city: form.city, note: form.note, wallet: form.wallet, points: form.points, isBanned: form.isBanned }
+                      ? { name: form.name.trim(), phone: toEnDigits(form.phone).trim(), email: form.email, city: form.city, note: form.note, wallet: form.wallet, points: form.points, isBanned: form.isBanned, password: form.password || undefined }
                       : { name: form.name.trim(), phone: toEnDigits(form.phone).trim(), email: form.email, city: form.city, note: form.note },
                   });
                   if (res.success) {

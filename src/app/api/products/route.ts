@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
+import { withRealRatings } from "@/lib/catalog";
 import { requireAdmin } from "@/lib/auth";
 
 export const dynamic = "force-dynamic";
@@ -28,7 +29,7 @@ export async function GET(req: NextRequest) {
       where,
       orderBy: [{ isBestseller: "desc" }, { createdAt: "asc" }],
     });
-    return NextResponse.json({ success: true, products });
+    return NextResponse.json({ success: true, products: await withRealRatings(products) });
   } catch (error) {
     console.error("GET /api/products error:", error);
     return NextResponse.json(

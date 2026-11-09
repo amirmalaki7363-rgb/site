@@ -139,6 +139,7 @@ export function toSafeUser(u: {
   city: string; birthday: string; gender: string; avatarHue: number;
   walletBalance: number; points: number; emailOffers: boolean; smsOffers: boolean;
   note: string; isBanned: boolean; memberSince: Date;
+  password?: string; createdAt?: Date; // stripped before returning
 }): SafeUser {
   const { password: _pw, createdAt: _c, ...rest } = u;
   return { ...rest, memberSince: u.memberSince.toISOString() };

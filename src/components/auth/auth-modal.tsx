@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { WHATSAPP_LINK } from "@/lib/shop-options";
 import {
   Flower2, Lock, User as UserIcon, Phone, Eye, EyeOff, CircleAlert,
   CheckCircle2, Gift, Loader2,
@@ -62,7 +63,7 @@ export default function AuthModal() {
           detail: {
             msg: tab === "login"
               ? `${user.name} عزیز، خوش برگشتید 🌸`
-              : "حساب شما ساخته شد! ۵۰ هزار تومان هدیه خوش‌آمدگی به کیف پول شما اضافه شد 🎁",
+              : "حساب شما ساخته شد! خوش آمدید 🌸",
           },
         })
       );
@@ -167,6 +168,16 @@ export default function AuthModal() {
             </div>
           </label>
 
+          {tab === "login" && (
+            <p className="text-[11px] text-muted-foreground leading-6">
+              رمز عبور خود را فراموش کرده‌اید؟{" "}
+              <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" className="font-bold text-charcoal underline underline-offset-4">
+                از طریق واتس‌آپ به پشتیبانی پیام بدهید
+              </a>{" "}
+              تا رمز جدید برایتان تعیین شود.
+            </p>
+          )}
+
           {error && (
             <p className="rounded-2xl bg-[#fbe4e3] text-[#c0392b] text-xs font-bold px-4 py-3 flex items-center gap-2">
               <CircleAlert className="size-4 shrink-0" /> {error}
@@ -184,7 +195,7 @@ export default function AuthModal() {
 
           {tab === "register" && (
             <p className="flex items-center justify-center gap-1.5 rounded-2xl bg-gold-soft/60 px-4 py-2.5 text-[11px] font-bold text-gold-dark">
-              <Gift className="size-3.5" /> هدیه ثبت‌نام: ۵۰٬۰۰۰ تومان اعتبار خرید
+              <Gift className="size-3.5" /> کد تخفیف WELCOME برای اولین سفارش
             </p>
           )}
           {tab === "login" && (

@@ -66,7 +66,7 @@ export function AuthScreen() {
       setView("user");
       window.dispatchEvent(
         new CustomEvent("gh:panel-toast", {
-          detail: { msg: tab === "login" ? `${res.user.name} عزیز، خوش برگشتید 🌸` : "حساب شما ساخته شد! ۵۰ هزار تومان هدیه خوش‌آمدگی گرفتید 🎁" },
+          detail: { msg: tab === "login" ? `${res.user.name} عزیز، خوش برگشتید 🌸` : "حساب شما ساخته شد! خوش آمدید 🌸" },
         })
       );
     } else {
@@ -157,7 +157,7 @@ export function AuthScreen() {
 
             {tab === "register" && (
               <p className="flex items-center justify-center gap-1.5 rounded-2xl bg-gold-soft/60 px-4 py-2.5 text-[11px] font-bold text-gold-dark">
-                <Gift className="size-3.5" /> هدیه ثبت‌نام: ۵۰٬۰۰۰ تومان اعتبار خرید
+                <Gift className="size-3.5" /> کد تخفیف WELCOME برای اولین سفارش
               </p>
             )}
           </form>

@@ -219,20 +219,32 @@ export async function POST(req: NextRequest) {
 
       // ================= reviews =================
       case "review.create": {
-        const r = data as { productId: string; productName: string; productImage: string; rating: number; comment: string };
-        if (!r.productId || !r.comment?.trim()) {
+        const r = (data ?? {}) as { productId?: unknown; rating?: unknown; comment?: unknown };
+        const comment = typeof r.comment === "string" ? r.comment.trim() : "";
+        if (typeof r.productId !== "string" || !comment) {
           return NextResponse.json({ success: false, error: "محصول و متن نظر الزامی است." }, { status: 400 });
         }
+        // name/image come from OUR database, never from the client
+        const product = await db.product.findUnique({ where: { id: r.productId } });
+        if (!product) {
+          return NextResponse.json({ success: false, error: "محصول یافت نشد." }, { status: 404 });
+        }
+        const already = await db.review.findFirst({ where: { userId: user.id, productId: product.id } });
+        if (already) {
+          return NextResponse.json({ success: false, error: "قبلاً برای این محصول نظر ثبت کرده‌اید." }, { status: 409 });
+        }
+        const rating = Number(r.rating);
         const review = await db.review.create({
           data: {
             userId: user.id,
-            productId: r.productId, productName: r.productName ?? "", productImage: r.productImage ?? "",
-            author: user.name, rating: Math.min(5, Math.max(1, Math.round(r.rating || 5))),
-            comment: r.comment.trim().slice(0, 2000), status: "pending",
+            productId: product.id, productName: product.name, productImage: product.image,
+            author: user.name, rating: Number.isFinite(rating) ? Math.min(5, Math.max(1, Math.round(rating))) : 5,
+            comment: comment.slice(0, 2000), status: "pending",
           },
         });
         return NextResponse.json({ success: true, data: review });
       }
+
       case "review.update": {
         const owned = await db.review.findUnique({ where: { id } });
         if (!owned || owned.userId !== user.id) {
@@ -511,6 +523,12 @@ export async function POST(req: NextRequest) {
             if (taken) return NextResponse.json({ success: false, error: "این شماره قبلاً ثبت شده است." }, { status: 400 });
             update.phone = phone;
           }
+        }
+        if (typeof c.password === "string" && c.password) {
+          // password reset on behalf of a customer (there is no SMS/email reset flow yet)
+          const pwErr = passwordPolicyError(c.password);
+          if (pwErr) return NextResponse.json({ success: false, error: pwErr }, { status: 400 });
+          update.password = hashPassword(c.password);
         }
         if (typeof c.wallet === "number") update.walletBalance = Math.max(0, Math.round(c.wallet));
         if (typeof c.points === "number") update.points = Math.max(0, Math.round(c.points));

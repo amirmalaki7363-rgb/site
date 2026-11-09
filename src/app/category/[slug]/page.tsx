@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getActiveProducts } from "@/lib/catalog";
-import { CATEGORY_SEO, SITE_NAME, SITE_URL, absUrl, faPrice, jsonLd } from "@/lib/site";
+import PageShell from "@/components/site/page-shell";
+import { ARTICLES } from "@/lib/articles";
+import { CATEGORY_ARTICLES, CATEGORY_CARE, CATEGORY_FAQ_EXTRA, CATEGORY_GUIDE, CATEGORY_SEO, COMMON_FAQ, SITE_NAME, SITE_URL, absUrl, faPrice, jsonLd } from "@/lib/site";
 import { CATEGORY_LABELS } from "@/lib/types";
 
 export const revalidate = 300;
@@ -30,6 +32,7 @@ export default async function CategoryPage({ params }: Props) {
   const c = CATEGORY_SEO[slug];
   if (!c) notFound();
   const products = await getActiveProducts(slug);
+  const articles = (CATEGORY_ARTICLES[slug] ?? []).map((id) => ARTICLES.find((a) => a.id === id)).filter((a): a is NonNullable<typeof a> => !!a);
 
   const schema = {
     "@context": "https://schema.org",
@@ -62,7 +65,7 @@ export default async function CategoryPage({ params }: Props) {
   };
 
   return (
-    <main className="min-h-screen bg-cream text-charcoal">
+    <PageShell>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(schema) }} />
       <div className="max-w-6xl mx-auto px-4 py-8">
         <nav aria-label="مسیر صفحه" className="text-xs text-muted-foreground mb-6 flex gap-2">
@@ -89,6 +92,32 @@ export default async function CategoryPage({ params }: Props) {
           </ul>
         )}
 
+
+        <section className="mt-14 max-w-3xl" aria-labelledby="guide">
+          <h2 id="guide" className="text-xl font-extrabold mb-3">راهنمای خرید {c.h1}</h2>
+          <div className="space-y-4 leading-9 text-charcoal/85">
+            {(CATEGORY_GUIDE[slug] ?? []).map((t) => (<p key={t}>{t}</p>))}
+          </div>
+          <h2 className="text-xl font-extrabold mt-8 mb-3">نکات نگهداری</h2>
+          <ul className="space-y-2 leading-8 text-charcoal/85 list-disc pr-5">
+            {(CATEGORY_CARE[slug] ?? []).map((t) => (<li key={t}>{t}</li>))}
+          </ul>
+          {articles.length > 0 && (
+            <>
+              <h2 className="text-xl font-extrabold mt-8 mb-3">مقاله‌های مرتبط</h2>
+              <ul className="space-y-2 text-sm">
+                {articles.map((a) => (<li key={a.id}><Link href={`/blog/${a.id}`} className="underline underline-offset-4 hover:text-blush-dark">{a.title}</Link></li>))}
+              </ul>
+            </>
+          )}
+          <h2 className="text-xl font-extrabold mt-8 mb-3">سوالات متداول</h2>
+          <dl className="space-y-4">
+            {[...(CATEGORY_FAQ_EXTRA[slug] ?? []), ...COMMON_FAQ().slice(0, 1)].map((f) => (
+              <div key={f.q}><dt className="font-bold">{f.q}</dt><dd className="mt-1 leading-8 text-charcoal/80">{f.a}</dd></div>
+            ))}
+          </dl>
+        </section>
+
         <nav aria-label="سایر دسته‌ها" className="mt-12 flex flex-wrap gap-3 text-sm">
           {Object.keys(CATEGORY_SEO).filter((k) => k !== slug).map((k) => (
             <Link key={k} href={`/category/${k}`} className="rounded-full border border-charcoal/20 px-4 py-2 hover:bg-white">
@@ -98,6 +127,6 @@ export default async function CategoryPage({ params }: Props) {
         </nav>
         <p className="mt-8"><Link href="/" className="text-sm underline">← بازگشت به فروشگاه</Link></p>
       </div>
-    </main>
+    </PageShell>
   );
 }

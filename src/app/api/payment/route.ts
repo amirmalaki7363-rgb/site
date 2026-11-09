@@ -10,7 +10,7 @@ import {
   sandboxAllowed,
   sandboxRefId,
 } from "@/lib/payment";
-import { assertSameOrigin, siteOrigin } from "@/lib/security";
+import { assertSameOrigin, isRateLimited, siteOrigin, tooManyRequests } from "@/lib/security";
 
 export const dynamic = "force-dynamic";
 
@@ -87,6 +87,7 @@ export async function POST(req: NextRequest) {
       );
     }
     const me = session.user;
+    if (isRateLimited(`pay:${me.id}`, 30, 10 * 60_000)) return tooManyRequests();
 
     const body = (await req.json().catch(() => ({}))) as {
       action?: string;

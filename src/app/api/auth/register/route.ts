@@ -63,7 +63,7 @@ export async function POST(req: NextRequest) {
       },
     });
 
-    // welcome notification + wallet gift (real rows for the new real account)
+    // welcome notification (real row for the new real account)
     await db.notification.create({
       data: {
         userId: user.id,
@@ -72,18 +72,21 @@ export async function POST(req: NextRequest) {
         type: "system",
       },
     });
-    await db.walletTx.create({
-      data: {
-        userId: user.id,
-        type: "gift",
-        amount: 50000,
-        description: "هدیه خوش‌آمدگویی — ۵۰ هزار تومان اعتبار خرید",
-      },
-    });
-    const updatedUser = await db.user.update({
-      where: { id: user.id },
-      data: { walletBalance: { increment: 50000 } },
-    });
+    // Optional welcome credit. OFF by default: without phone verification it can be farmed with fake
+    // accounts. Enable with SIGNUP_GIFT_AMOUNT=50000 once registration requires SMS verification.
+    const gift = Math.max(0, Math.min(500_000, Math.round(Number(process.env.SIGNUP_GIFT_AMOUNT ?? 0)) || 0));
+    let updatedUser = user;
+    if (gift > 0) {
+      await db.walletTx.create({
+        data: {
+          userId: user.id,
+          type: "gift",
+          amount: gift,
+          description: `هدیه خوش‌آمدگویی — ${new Intl.NumberFormat("fa-IR").format(gift)} تومان اعتبار خرید`,
+        },
+      });
+      updatedUser = await db.user.update({ where: { id: user.id }, data: { walletBalance: { increment: gift } } });
+    }
 
     const res = NextResponse.json({ success: true, user: toSafeUser(updatedUser) });
     setSessionCookie(res, user.id, user.role, user.password, req);

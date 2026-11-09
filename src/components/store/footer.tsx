@@ -8,18 +8,23 @@ import { useView } from "@/lib/panel-store";
 import { WHATSAPP_NUMBER, WHATSAPP_LINK, INSTAGRAM_LINK, INSTAGRAM_HANDLE } from "@/lib/shop-options";
 
 const SHOP_LINKS = [
-  { label: "دسته‌گل", href: "#products" },
-  { label: "باکس گل", href: "#products" },
-  { label: "گیاه آپارتمانی", href: "#products" },
-  { label: "گل‌های فصلی", href: "#products" },
+  { label: "دسته‌گل", href: "/category/bouquet" },
+  { label: "باکس گل", href: "/category/box" },
+  { label: "گیاه آپارتمانی", href: "/category/plant" },
+  { label: "گل‌های فصلی", href: "/category/seasonal" },
+  { label: "گل خشک", href: "/category/dried" },
   { label: "خدمات ویژه", href: "#services" },
 ];
 const GUIDE_LINKS = [
   { label: "سوالات متداول", href: "#faq" },
-  { label: "مجله گلستان", href: "#blog" },
+  { label: "مجله گلستان", href: "/blog" },
   { label: "رهگیری سفارش", href: "#tracking" },
   { label: "فال حافظ", href: "#hafez" },
-  { label: "درباره ما", href: "#about" },
+  { label: "درباره ما", href: "/about" },
+  { label: "ارسال و بازگشت", href: "/shipping-returns" },
+  { label: "تماس با ما", href: "/contact" },
+  { label: "قوانین و مقررات", href: "/terms" },
+  { label: "حریم خصوصی", href: "/privacy" },
 ];
 
 export default function Footer() {
@@ -27,14 +32,28 @@ export default function Footer() {
   const [email, setEmail] = useState("");
   const setView = useView((s) => s.setView);
 
-  function subscribe(e: React.FormEvent) {
+  async function subscribe(e: React.FormEvent) {
     e.preventDefault();
     if (!email.trim()) return;
-    setEmail("");
-    toast({
-      title: "عضویت شما ثبت شد! 🌸",
-      description: "از این پس تخفیف‌های فصلی و گل‌های تازه‌رسیده را زودتر از همه می‌بینید.",
-    });
+    try {
+      const res = await fetch("/api/newsletter", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: email.trim() }),
+      });
+      const d = await res.json().catch(() => ({}));
+      if (!res.ok || !d.success) {
+        toast({ title: "ثبت عضویت انجام نشد", description: d.error ?? "دوباره تلاش کنید.", variant: "destructive" });
+        return;
+      }
+      setEmail("");
+      toast({
+        title: "عضویت شما ثبت شد! 🌸",
+        description: "از این پس تخفیف‌های فصلی و گل‌های تازه‌رسیده را زودتر از همه می‌بینید.",
+      });
+    } catch {
+      toast({ title: "ارتباط با سرور برقرار نشد", description: "دوباره تلاش کنید.", variant: "destructive" });
+    }
   }
 
   function openTracking() {
@@ -96,7 +115,6 @@ export default function Footer() {
           <div className="mt-5 flex items-center gap-2">
             {[
               { icon: Instagram, label: "اینستاگرام گلستان حافظ", href: INSTAGRAM_LINK },
-              { icon: Send, label: "کانال تلگرام گلستان حافظ", href: "#" },
               { icon: MessageCircle, label: "واتساپ گلستان حافظ", href: WHATSAPP_LINK },
             ].map((s) => (
               <a

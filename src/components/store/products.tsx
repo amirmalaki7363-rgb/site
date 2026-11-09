@@ -287,7 +287,7 @@ export default function Products() {
                     <span className="text-[10px] font-semibold text-sage-dark bg-sage-soft px-2 py-0.5 rounded-full">
                       {CATEGORY_LABELS[p.category] ?? p.category}
                     </span>
-                    <Stars rating={p.rating} />
+                    {p.reviews > 0 ? <Stars rating={p.rating} /> : <span />}
                   </div>
                   <h3 className="font-bold text-sm md:text-base text-charcoal leading-6">
                     <a
@@ -349,10 +349,14 @@ export default function Products() {
                     <span className="text-[10px] font-semibold text-sage-dark bg-sage-soft px-2 py-0.5 rounded-full">
                       {CATEGORY_LABELS[quickView.category] ?? quickView.category}
                     </span>
-                    <Stars rating={quickView.rating} />
-                    <span className="text-[11px] text-muted-foreground">
-                      ({faNumber(quickView.reviews)} دیدگاه)
-                    </span>
+                    {quickView.reviews > 0 && (
+                      <>
+                        <Stars rating={quickView.rating} />
+                        <span className="text-[11px] text-muted-foreground">
+                          ({faNumber(quickView.reviews)} دیدگاه)
+                        </span>
+                      </>
+                    )}
                     <span className="mr-auto hidden sm:block">
                       <HeartButton product={quickView} />
                     </span>

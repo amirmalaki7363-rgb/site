@@ -6,8 +6,9 @@ export default function robots(): MetadataRoute.Robots {
     rules: [
       {
         userAgent: "*",
-        allow: "/",
-        // keep private/functional endpoints out of the index
+        // longest rule wins: product photos uploaded from the admin panel stay crawlable,
+        // everything else under /api/ is kept out of the index
+        allow: ["/", "/api/images/"],
         disallow: ["/api/"],
       },
     ],

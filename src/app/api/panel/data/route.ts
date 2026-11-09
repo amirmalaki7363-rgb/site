@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
+import { withRealRatings } from "@/lib/catalog";
 import { getSessionUser } from "@/lib/auth";
-import type { OrderItem, PanelData, PanelStats } from "@/lib/types";
+import type { OrderItem, PanelData, PanelStats, OrderStatus } from "@/lib/types";
 
 export const dynamic = "force-dynamic";
 
@@ -15,7 +16,7 @@ function emptyStats(products: { isActive: boolean; stock: number }[]): PanelStat
 }
 
 function parseOrders(rows: {
-  id: string; code: string; customerName: string; phone: string; address: string;
+  id: string; code: string; userId: string; customerName: string; phone: string; address: string;
   city: string; province: string; postal: string; deliveryDate: string; deliverySlot: string;
   cardMessage: string; addons: string; couponCode: string; paymentMethod: string; shippingCost: number;
   discount: number; pointsEarned: number; note: string | null; items: string; total: number;
@@ -23,6 +24,7 @@ function parseOrders(rows: {
 }[]) {
   return rows.map((o) => ({
     ...o,
+    status: o.status as OrderStatus,
     addons: JSON.parse(o.addons || "[]"),
     items: JSON.parse(o.items || "[]"),
     paidAt: o.paidAt ? o.paidAt.toISOString() : null,
@@ -239,7 +241,7 @@ export async function GET(req: NextRequest) {
       notifications: notifications.map((n) => ({ ...n, createdAt: n.createdAt.toISOString() })),
       customers,
       orders,
-      products: isAdmin ? products : products.filter((p) => p.isActive),
+      products: await withRealRatings(isAdmin ? products : products.filter((p) => p.isActive)),
       settings: (isAdmin
         ? settingsRows
         : settingsRows && { ...settingsRows, zarinpalMerchantId: "" }) ?? {

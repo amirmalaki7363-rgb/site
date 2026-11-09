@@ -65,3 +65,4 @@ tool-results/
 dev.log
 server.log
 *.tar.gz
+backups/

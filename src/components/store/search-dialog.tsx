@@ -146,9 +146,11 @@ export default function SearchDialog({
                       <span className="text-[10px] font-semibold text-sage-dark bg-sage-soft px-2 py-0.5 rounded-full">
                         {CATEGORY_LABELS[p.category] ?? p.category}
                       </span>
-                      <span className="text-[11px] text-gold-dark flex items-center gap-0.5">
-                        ★ {faDecimal(p.rating)}
-                      </span>
+                      {p.reviews > 0 && (
+                        <span className="text-[11px] text-gold-dark flex items-center gap-0.5">
+                          ★ {faDecimal(p.rating)}
+                        </span>
+                      )}
                     </div>
                     <p className="text-xs font-extrabold text-gold-dark mt-1">
                       {faNumber(p.price)} تومان
